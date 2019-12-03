@@ -19,7 +19,15 @@ import { Home, FAQ, Investors, MainApp, Unicorns, Profile } from './pages';
 import { SignIn, SignUp } from './auth';
 import 'normalize.css';
 
-const isAuthenticated = () => false; 
+
+import Amplify from 'aws-amplify';
+import awsConfig from './amplify-config';
+
+Amplify.configure(awsConfig);
+
+
+
+const isAuthenticated = () => Amplify.Auth.user !== null;
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
